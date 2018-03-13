@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Configuration
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <strong>
+        IP address
+      </strong>
+      {{ipAddress}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <strong>
+        Modules
+      </strong>
+    </ion-card-header>
+    <ion-card-content>
+      {{statusText}}
+      <button (click)="seachModules()" ion-button full>Refresh modules</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let module of moduleList">
+    <ion-card-content>
+      <a (click)="openModule(module.ipAddress)">Module {{module.id}}</a>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
