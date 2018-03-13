@@ -27,7 +27,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let module of moduleList">
+  <ion-card *ngFor="let module of modulesProvider.moduleList">
     <ion-card-content>
       <a (click)="openModule(module.ipAddress)">Module {{module.id}}</a>
     </ion-card-content>

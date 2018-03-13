@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, NgZone} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NetworkInterface } from '@ionic-native/network-interface';
 import { Http } from '@angular/http';
-import { Storage } from '@ionic/storage';
+import { ModulesProvider } from '../../providers/modules/modules';
 
 @Component({
   selector: 'page-configuration',
@@ -10,29 +10,22 @@ import { Storage } from '@ionic/storage';
 })
 export class ConfigurationPage {
   ipAddress: string = "0.0.0.0";
-  networkInterface: any;
   moduleList: any = [];
   statusText: string = "";
+  netI: any;
 
-  constructor(public navCtrl: NavController, private networkInterface: NetworkInterface, public http: Http, private storage: Storage) {
+  constructor(public navCtrl: NavController, public networkInterface: NetworkInterface, private _ngZone: NgZone, public http: Http, private modulesProvider: ModulesProvider) {
     this.ipAddress = '192.168.0.1';
-    this.networkInterface = this.networkInterface;
-    this.storage  = storage;
+    this.netI = networkInterface;
 
     setTimeout(() => {
       this.getIP();
     }, 1000);
-
-    this.storage.get('modules').then((val) => {
-      this.moduleList = val;
-
-      if (!this.moduleList) this.moduleList = [];
-    });
   }
 
   getIP() {
 		try {
-			this.networkInterface.getWiFiIPAddress((ip) => {
+			this.netI.getWiFiIPAddress((ip) => {
 				this._ngZone.run(() => {
 					this.ipAddress = ip;
 				});
@@ -59,6 +52,7 @@ export class ConfigurationPage {
 
     let iterations = 0;
     this.statusText = 'Looking for modules... 0/255';
+    this.modulesProvider.clear();
 
     let testInterval = setInterval(() => {
       var ipAddresse = ipAddresses.shift();
@@ -66,8 +60,7 @@ export class ConfigurationPage {
       this.http.get('http://' + ipAddresse + '/status').subscribe(data => {
         let config = JSON.parse((<any>data)._body);
 
-        this.moduleList.push({ipAddress: ipAddresse, id: config.address});
-        this.storage.set('modules', this.moduleList);
+        this.modulesProvider.registerModule({ipAddress: ipAddresse, id: config.address});
       });
 
       this.statusText = 'Looking for modules... ' + (++iterations) + '/255';

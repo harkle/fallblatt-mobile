@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { NetworkInterface } from '@ionic-native/network-interface';
 import { IonicStorageModule } from '@ionic/storage';
+import { ModulesProvider } from '../providers/modules/modules';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +42,8 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     NetworkInterface,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ModulesProvider
   ]
 })
 export class AppModule {}
