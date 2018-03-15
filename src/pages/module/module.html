@@ -6,13 +6,17 @@
       </button>
     </ion-buttons>
     <ion-title>
-      Module {{modulesProvider.currentModule.id}}
+      Module management
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
+    <module-line [module]="modulesProvider.currentModule"></module-line>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="alert" color="danger"></ion-icon>
     <ion-label>Mode</ion-label>
     <ion-select [(ngModel)]="modulesProvider.currentModule.status.mode" (ngModelChange)="setMode()">
       <ion-option value="static">Static</ion-option>

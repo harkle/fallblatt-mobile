@@ -34,6 +34,8 @@ export class ModulesProvider {
   select(module: Module) {
     this.currentModule = module;
 
+    module.refresh();
+
     this.events.publish('view:module');
   }
 

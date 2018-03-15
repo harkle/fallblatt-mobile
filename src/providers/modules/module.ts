@@ -21,29 +21,9 @@ export class Module {
     this.ipAddress = data.ipAddress;
     this.id = data.id;
 
-    this.status = new StatusModel({
-      address: 0,
-      isReady: false,
-      mode: 'static',
-      network: false,
-      position: 0,
-      serial: false,
-      type: ''
-    });
-
-    this.http.get('http://' + this.ipAddress + '/list').subscribe(data => {
-      let messages = JSON.parse((<any>data)._body);
-
-      messages.forEach((message, index) => {
-        if (message) {
-          this.messages.push({index: index, message: message});
-        }
-      });
-    });
-
     this.socket = new ModuleSocket(this.ipAddress);
-
-    this.socket.emit('join', '');
+    this.refresh();
+    this.list();
 
     this.socket.on('status', (data) => {
       this.status = new StatusModel(data);
@@ -55,6 +35,32 @@ export class Module {
 
     this.socket.on('mode', (data) => {
       this.status.mode = data.mode;
+    });
+  }
+
+  refresh() {
+    this.status = new StatusModel({
+      address: 0,
+      isReady: false,
+      mode: 'static',
+      network: false,
+      position: 0,
+      serial: false,
+      type: ''
+    });
+
+    this.socket.emit('update', '');
+  }
+
+  list() {
+    this.http.get('http://' + this.ipAddress + '/list').subscribe(data => {
+      let messages = JSON.parse((<any>data)._body);
+
+      messages.forEach((message, index) => {
+        if (message) {
+          this.messages.push({index: index, message: message});
+        }
+      });
     });
   }
 }

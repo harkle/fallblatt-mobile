@@ -1,8 +1,8 @@
-<b>Module {{module.id}}</b>
-<i>{{module.status.type}}</i>
-
 <div float-left>
   <ion-icon name="alert" *ngIf='!module.status.isReady' color="danger"></ion-icon>
   <ion-icon name="warning" *ngIf='!module.status.serial && module.status.isReady' color="warning"></ion-icon>
   <ion-icon name="checkmark-circle" *ngIf='module.status.serial && module.status.isReady' color="success"></ion-icon>
 </div>
+
+<b>Module {{module.id}}</b>
+<i>{{module.status.type}}</i>
