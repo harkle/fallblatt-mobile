@@ -13,6 +13,7 @@ export class ConfigurationPage {
   moduleList: any = [];
   statusText: string = "";
   netI: any;
+  isScanning: boolean = false;
 
   constructor(public navCtrl: NavController, public networkInterface: NetworkInterface, private _ngZone: NgZone, public http: Http, private modulesProvider: ModulesProvider) {
     this.ipAddress = '192.168.0.1';
@@ -36,6 +37,7 @@ export class ConfigurationPage {
 	}
 
   seachModules() {
+    this.isScanning = true;
     let ipAddresses: Array<any> = [];
     let base: string = '192.168.0.';
 
@@ -67,7 +69,8 @@ export class ConfigurationPage {
 
       if (ipAddresses.length == 0) {
         clearInterval(testInterval);
-        this.statusText = '';
+        this.statusText = (this.modulesProvider.moduleList.length > 0) ? '' : 'No module found';
+        this.isScanning = false;
       }
     }, 100);
   }

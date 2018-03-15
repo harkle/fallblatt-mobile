@@ -22,13 +22,13 @@
       </strong>
     </ion-card-header>
     <ion-card-content>
+      <button (click)="seachModules()" ion-button full [disabled]='isScanning'>Refresh modules</button>
       {{statusText}}
       <ion-list>
         <button ion-item *ngFor="let module of modulesProvider.moduleList" (click)="modulesProvider.select(module)">
           <module-line [module]="module"></module-line>
         </button>
       </ion-list>
-      <button (click)="seachModules()" ion-button full>Refresh modules</button>
     </ion-card-content>
   </ion-card>
 </ion-content>

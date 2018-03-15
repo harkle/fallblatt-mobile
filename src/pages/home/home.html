@@ -6,8 +6,12 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let module of modulesProvider.moduleList" (click)="modulesProvider.select(module)">
+    <button ion-item detail-push *ngFor="let module of modulesProvider.moduleList" (click)="modulesProvider.select(module)">
       <module-line [module]="module"></module-line>
+    </button>
+    <button ion-item detail-push *ngIf="modulesProvider.moduleList.length == 0">
+      <ion-icon name="alert" color="danger"></ion-icon>
+      No module registered
     </button>
   </ion-list>
 </ion-content>

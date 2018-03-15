@@ -19,6 +19,7 @@ export class ModulesProvider {
 
   clear() {
     this.moduleList = [];
+    this.save();
   }
 
   save() {
