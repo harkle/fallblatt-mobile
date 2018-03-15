@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-networkinterface" spec="^1.2.0" />
     <allow-navigation href="*" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
+    <engine name="ios" spec="4.5.4" />
 </widget>

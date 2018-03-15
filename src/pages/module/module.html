@@ -1,17 +1,28 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Contact
+      Module {{modulesProvider.currentModule.id}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label>Mode</ion-label>
+    <ion-select [(ngModel)]="modulesProvider.currentModule.status.mode" (ngModelChange)="setMode()">
+      <ion-option value="static">Static</ion-option>
+      <ion-option value="random">Random</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Message</ion-label>
+    <ion-select [(ngModel)]="modulesProvider.currentModule.status.position" (ngModelChange)="setPosition()">
+      <ion-option *ngFor="let message of modulesProvider.currentModule.messages" value="{{message.index}}">{{message.message}}</ion-option>
+    </ion-select>
+  </ion-item>
 </ion-content>

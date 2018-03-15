@@ -4,8 +4,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { ConfigurationPage } from '../pages/configuration/configuration';
-import { ModulePage } from '../pages/module/module';
 import { HomePage } from '../pages/home/home';
+import { ModulePage } from '../pages/module/module';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,27 +15,29 @@ import { HttpModule } from '@angular/http';
 import { NetworkInterface } from '@ionic-native/network-interface';
 import { IonicStorageModule } from '@ionic/storage';
 import { ModulesProvider } from '../providers/modules/modules';
+import { ModuleLineComponent } from '../components/module-line/module-line';
 
 @NgModule({
   declarations: [
     MyApp,
     ConfigurationPage,
-    ModulePage,
     HomePage,
-    TabsPage
+    ModulePage,
+    TabsPage,
+    ModuleLineComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     ConfigurationPage,
-    ModulePage,
     HomePage,
+    ModulePage,
     TabsPage
   ],
   providers: [

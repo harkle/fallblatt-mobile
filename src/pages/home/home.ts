@@ -8,8 +8,6 @@ import { ModulesProvider } from '../../providers/modules/modules';
 })
 
 export class HomePage {
-  moduleList: any = [];
-
   constructor(public navCtrl: NavController, private modulesProvider: ModulesProvider) {
   }
 }

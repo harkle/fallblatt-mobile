@@ -46,7 +46,7 @@ export class ConfigurationPage {
 
     let port: string = ':3000';
 
-    for (let i: number = 255; i > 0; i--) {
+    for (let i: number = 0; i < 256; i++) {
       ipAddresses.push(base + i + port);
     }
 

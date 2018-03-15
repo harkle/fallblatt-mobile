@@ -4,17 +4,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card *ngFor="let module of modulesProvider.moduleList">
-    <ion-card-content>
-      <b>Module {{module.id}}</b>
-      {{module.status.type}}
-
-      <div float-right>
-        <ion-icon name="alert" *ngIf='!module.status.isReady' color="danger"></ion-icon>
-        <ion-icon name="warning" *ngIf='!module.status.serial && module.status.isReady' color="warning"></ion-icon>
-        <ion-icon name="checkmark-circle" *ngIf='module.status.serial && module.status.isReady'></ion-icon>        
-      </div>
-    </ion-card-content>
-  </ion-card>
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let module of modulesProvider.moduleList" (click)="modulesProvider.select(module)">
+      <module-line [module]="module"></module-line>
+    </button>
+  </ion-list>
 </ion-content>
