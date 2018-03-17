@@ -23,6 +23,39 @@
       <ion-option value="random">Random</ion-option>
     </ion-select>
   </ion-item>
+  <ion-item *ngIf="modulesProvider.currentModule.status.mode == 'random'">
+    <ion-label>Duration</ion-label>
+    <ion-select [(ngModel)]="modulesProvider.currentModule.status.randomDuration" (ngModelChange)="setMode()">
+      <ion-option value="5">5 seconds</ion-option>
+      <ion-option value="10">10 seconds</ion-option>
+      <ion-option value="15">15 seconds</ion-option>
+      <ion-option value="20">20 seconds</ion-option>
+      <ion-option value="25">25 seconds</ion-option>
+      <ion-option value="30">30 seconds</ion-option>
+      <ion-option value="60">1 minute</ion-option>
+      <ion-option value="120">2 minute</ion-option>
+      <ion-option value="180">3 minutes</ion-option>
+      <ion-option value="240">4 minutes</ion-option>
+      <ion-option value="300">5 minutes</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="modulesProvider.currentModule.status.mode == 'random'">
+    <ion-label>Variation</ion-label>
+    <ion-select [(ngModel)]="modulesProvider.currentModule.status.randomVariation" (ngModelChange)="setMode()">
+      <ion-option value="0">No variation</ion-option>
+      <ion-option value="5">5 seconds</ion-option>
+      <ion-option value="10">10 seconds</ion-option>
+      <ion-option value="15">15 seconds</ion-option>
+      <ion-option value="20">20 seconds</ion-option>
+      <ion-option value="25">25 seconds</ion-option>
+      <ion-option value="30">30 seconds</ion-option>
+      <ion-option value="60">1 minute</ion-option>
+      <ion-option value="120">2 minute</ion-option>
+      <ion-option value="180">3 minutes</ion-option>
+      <ion-option value="240">4 minutes</ion-option>
+      <ion-option value="300">5 minutes</ion-option>
+    </ion-select>
+  </ion-item>
   <ion-item>
     <ion-label>Message</ion-label>
     <ion-select [(ngModel)]="modulesProvider.currentModule.status.position" (ngModelChange)="setPosition()">

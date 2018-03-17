@@ -18,14 +18,14 @@ export class ModulePage {
   }
 
   setPosition() {
-    this.http.get('http://' + this.modulesProvider.currentModule.ipAddress + '/move/' + this.modulesProvider.currentModule.status.position).subscribe(data => { });
+    this.modulesProvider.currentModule.socket.emit('move', {destination: this.modulesProvider.currentModule.status.position});
   }
 
   setMode() {
     if (this.modulesProvider.currentModule.status.mode == 'static') {
-      this.http.get('http://' + this.modulesProvider.currentModule.ipAddress + '/random/stop').subscribe(data => { });
+      this.modulesProvider.currentModule.socket.emit('random', {action: 'stop'});
     } else {
-      this.http.get('http://' + this.modulesProvider.currentModule.ipAddress + '/random/start').subscribe(data => { });
+      this.modulesProvider.currentModule.socket.emit('random', {action: 'start'});
     }
   }
 }

@@ -26,6 +26,7 @@ export class Module {
     this.list();
 
     this.socket.on('status', (data) => {
+      console.log(data);
       this.status = new StatusModel(data);
     });
 
@@ -35,6 +36,14 @@ export class Module {
 
     this.socket.on('mode', (data) => {
       this.status.mode = data.mode;
+    });
+
+    this.socket.on('list', (data) => {
+      data.forEach((message, index) => {
+        if (message) {
+          this.messages.push({index: index, message: message});
+        }
+      });
     });
   }
 
@@ -49,18 +58,10 @@ export class Module {
       type: ''
     });
 
-    this.socket.emit('update', '');
+    this.socket.emit('status', '');
   }
 
   list() {
-    this.http.get('http://' + this.ipAddress + '/list').subscribe(data => {
-      let messages = JSON.parse((<any>data)._body);
-
-      messages.forEach((message, index) => {
-        if (message) {
-          this.messages.push({index: index, message: message});
-        }
-      });
-    });
+    this.socket.emit('list', '');
   }
 }

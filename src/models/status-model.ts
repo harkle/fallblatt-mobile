@@ -6,6 +6,8 @@ export class StatusModel {
   position: number;
   serial: boolean;
   type: string;
+  randomDuration: number;
+  randomVariation: number;
 
   constructor(data: object) {
     this.address = 0;
@@ -15,5 +17,7 @@ export class StatusModel {
     this.position = (<any>data).position;
     this.serial = (<any>data).serial;
     this.type = (<any>data).type;
+    this.randomDuration = (<any>data).randomDuration;
+    this.randomVariation = (<any>data).randomVariation;
   }
 }
